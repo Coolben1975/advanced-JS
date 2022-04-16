@@ -1,0 +1,54 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.container {
+	margin: 0 auto;
+	width: 1140px;
+}
+
+.header {
+	background-color: #222222;
+	height: 80px;
+	padding: 18px 16px;
+	box-sizing: border-box;
+}
+
+.headerCentering {
+	display: flex;
+	justify-content: space-between;
+}
+
+.titleHeader {
+	font-size: 40px;
+	line-height: 36px;
+	color: #ffffff;
+}
+
+.cart-button {
+	width: 100px;
+	height: 44px;
+	font-size: 18px;
+}
+
+.goods-list {
+	margin-top: 60px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.goods-item {
+	width: 200px;
+	height: 300px;
+	padding: 10px;
+	outline: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 80px;
+	box-sizing: border-box;
+	background: darkgray;
+}
