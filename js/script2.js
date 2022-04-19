@@ -1,22 +1,59 @@
-const goods = [
-	{ title: 'Shirt', price: 150 },
-	{ title: 'Socks', price: 50 },
-	{ title: 'Jacket', price: 350 },
-	{ title: 'Shoes', price: 250 },
-];
+class GoodList {
+	constructor() {
+		this.goods = [];
+		this.allGoods = [];
+		this.sum = 0;
+		this._takeGoods();
+		this.render();
+	}
 
-const renderGoodsItem = ({ title = 'Name', price = 0 }) => `
-	<div class="goods-item">
-		<h3>${title}</h3>
-		<p>${price}</p>
-	</div>
-	`;
+	_takeGoods() {
+		this.goods = [
+			{ id: 1, title: 'Shirt', price: 150 },
+			{ id: 2, title: 'Socks', price: 50 },
+			{ id: 3, title: 'Jacket', price: 350 },
+			{ id: 4, title: 'Shoes', price: 250 },
+		];
+	}
 
+	countSum() {
+		this.allGoods.forEach((good) => {
+			this.sum += good.price;
+		})
+		return this.sum
+	}
 
-const renderGoodsList = (list) => {
-	let goodsList = list.map(item => renderGoodsItem(item)).join('');
-	document.querySelector('.goods-list').innerHTML = goodsList;
+	render() {
+		const goodsListHtml = document.querySelector('.goods-list');
+		for (let good of this.goods) {
+			const item = new GoodItem(good) // item - экземпляр класса GoodItem (1 строка из массива товаров)
+			this.allGoods.push(item); // пушим строку из массива товаров в массив товаров на экране 
+			goodsListHtml.innerHTML += item.render(); // добавляем разметку для экземпляра класса GoodItem и вставляем на страницу
+		}
+
+		document.querySelector('.total-sum').insertAdjacentHTML("afterbegin", `
+			<br>
+			<hr>
+			<p>Общая сумма всех товаров: ${this.countSum()}</p>`)
+	}
 }
 
-renderGoodsList(goods);
-// debugger
+
+class GoodItem {    // формируем 1 продукт
+	constructor(product) {
+		this.id = product.id;
+		this.title = product.title;
+		this.price = product.price;
+	}
+
+	render() {
+		return `
+		<div class="goods-item" data-id=${this.id}>
+			<h3>${this.title}</h3>
+			<p>${this.price}</p>
+		</div>
+		`;
+	}
+}
+
+const list = new GoodList;
